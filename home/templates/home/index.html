@@ -10,32 +10,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid hero-image">
-        <div class="container message-view">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                        {{ message | safe }}
-                        <button type="button" class="close"><script>setTimeout(() => {
-                            $('.alert').alert('close')
-                        }, 2000)</script></button>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="row max-height-bm-index">
-            <div class="col-12 my-auto text-left">
-                <h1 class=" braidme-tagline display-3">
-                    My Hair,<br>My Story
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-7 col-md-6 my-auto">
+                <h1 class="display-4 logo-font text-black">
+                    The new collections are here
                 </h1>
-                <p class="braidme-subtitle">
-                    Documenting my hair care journey from sisterlocks<br>to protective styles
-                </p>
-                <div class="mt-5">
+                <div class="my-5">
                     <h4>
-                        <a href="" class="btn btn-lg btn-light btn-cta py-1">Read Now</a>
+                        <a href="" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
                     </h4>
                 </div>
             </div>

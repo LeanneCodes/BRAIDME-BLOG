@@ -1,35 +1,13 @@
-:root {
-    --hero-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664811813/black_women_colour_tone_adjust_skbqor.png');
-    --second-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664925519/jessica-felicio-F16KPYxfm6s-unsplash_kblwqa.jpg');
-}
-
 html {
     height: 100%;
 }
 
 body {
-    /* background: var(--bg-url);
-    background-color: #3d3635; */
+    background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
+    background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
-    font-family: 'Roboto', sans-serif;
-}
-
-header {
-    background-color: transparent !important;
-}
-
-.message-view {
-    padding-top: 131px;
-}
-
-/* Homepage */
-
-.hero-image {
-    background: var(--hero-image) no-repeat center center fixed;
-    background-color: #3d3635;
-    margin-top: -160px;
-    min-height: calc(100vh - 76px);
+    font-family: 'Lato';
 }
 
 /* from Bulma */
@@ -42,79 +20,7 @@ header {
 }
 
 .logo-font {
-    font-family: 'Roboto Slab', serif !important;
-    color: whitesmoke;
-    letter-spacing: 0.5rem !important;
-}
-
-.logo-font-footer {
-    color: #835C47;
-    letter-spacing: 0.5rem !important;
-    font-family: 'Roboto Slab', serif !important;
-}
-
-.sticky-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    height: calc(100vh - 164px);
-}
-
-.max-height-bm-index {
-    min-height: calc(100vh - 273px) !important;
-    padding-top: 0%;
-    padding-left: 8%;
-}
-
-.max-height-bm {
-    min-height: calc(100vh - 273px) !important;
-    padding-top: 0%;
-    padding-left: 8%;
-}
-
-.braidme-tagline {
-    color: whitesmoke;
-    letter-spacing: 0.3rem;
-    font-family: 'Roboto Slab', serif !important;
-}
-
-.braidme-subtitle {
-    color: whitesmoke;
-}
-
-.banner {
-    text-align: center;
-    color: #835C47;
-    justify-content: center;
-    max-width: 100%;
-    margin: auto;
-    padding: 0.7rem 0rem;
-}
-
-.border-brown {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.btn-brown {
-    background-color: white;
-    color: #835C47;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.btn-cta {
-    background-color: white;
-    color: #835C47;
-}
-
-.blog-submit {
-    background-color: white;
-    color: #835C47;
-    border-radius: 6px;
-    border: 1px solid #835C47;
+    text-transform: uppercase;
 }
 
 .main-logo-link {
@@ -150,217 +56,9 @@ header {
     border: 1px solid black !important;
 }
 
-/* Blog */
-
-.blog-bottom-space {
-    padding-bottom: 45px;
+.bg-black {
+    background: #000 !important;
 }
-
-.topnav-color {
-    background-color: #E5C185 !important;
-    transition: all 1s;
-}
-
-.navbar-bm {
-    background-color: transparent;
-}
-
-.blog-background {
-    background-color: rgba(222, 176, 99, 0.78);
-    color: #555;
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh !important;
-}
-
-.page-link {
-    border-radius: 6px;
-    background-color: white;
-    color: #445261;
-    text-transform: capitalize !important;
-}
-
-.raise {
-    margin-top: -15px !important;
-    background-color: whitesmoke;
-}
-
-.red-o {
-    color: #dd8a62;
-}
-
-.thin {
-    font-weight: 300;
-}
-
-.light-bg {
-    background-color: #fff;
-}
-
-.dark-bg {
-    background-color: #445261;
-}
-
-.main-bg {
-    background-color: #F9FAFC;
-}
-
-.card {
-    border: none;
-    background-color: transparent;
-}
-
-.blog-margin {
-    margin-top: 150px;
-}
-
-.image-container {
-    position: relative;
-}
-
-.title-container {
-    position: relative;
-    background-color: whitesmoke;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    padding: 30px;
-}
-
-.image-flash {
-    position: absolute;
-    bottom: 5%;
-    min-width: 30%;
-    left: -10px;
-    background-color: whitesmoke;
-    border-radius: 6px;
-}
-
-.author {
-    color: #445261;
-    margin: 4px;
-}
-
-.card-image-top {
-    border-radius: 6px !important;
-}
-
-/* Post Detail */
-
-.masthead {
-    margin-top: 7px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    height: 33vh;
-    width: 100%;
-}
-
-.masthead-text {
-    background-color: whitesmoke;
-    color: #445261;
-    position: relative;
-}
-
-.masthead-image {
-    position: relative;
-    overflow: hidden;
-    padding: 0 !important;
-}
-
-.masthead-image:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 80%;
-    height: 100%;
-    width: 150%;
-    background: whitesmoke;
-    -webkit-transform: skew(15deg);
-    -moz-transform: skew(15deg);
-    transform: skew(15deg);
-    z-index: 100;
-}
-
-.pagination {
-    margin-bottom: 0 !important;
-    padding-bottom: 20px !important;
-}
-
-.post-link {
-    text-decoration: none;
-    color: #445261;
-}
-
-.post-link:hover,
-.page-link {
-    color: #445261;
-}
-
-.post-title {
-    margin-top: 20%;
-    margin-left: 5%;
-}
-
-.post-subtitle {
-    margin-left: 5%;
-    color: #445261;
-}
-
-.btn-signup {
-    background-color: #23BBBB;
-    color: #fff;
-}
-
-.btn-signup:hover,
-.btn-signup:active {
-    background-color: #fff;
-    color: #23BBBB;
-}
-
-.link {
-    color: #23BBBB;
-    text-decoration: none;
-}
-
-.link:hover,
-.link:active {
-    color: #445261;
-    text-decoration: underline;
-}
-
-.btn-like {
-    color: #E84610;
-    border: none;
-    background: transparent;
-}
-
-.btn-like:hover,
-.btn-like:active {
-    color: #E84610;
-    background: transparent;
-    border: none;
-}
-
-/* Auth */
-
-.second-image {
-    background: var(--second-image) no-repeat center center fixed;
-    background-color: #3d3635;
-    margin-top: -160px;
-    min-height: calc(100vh - 76px);
-}
-
-.link-yellow {
-    color: #DEB063;
-}
-
-.link-yellow:hover {
-    color: #F9FAFC;
-}
-
-.auth-text-color {
-    color: rgba(131, 130, 130, 0.95) !important;
-}
-
 
 /* -------------------------------- Media Queries */
 
@@ -372,18 +70,6 @@ header {
 }
 
 /* fixed top navbar only on medium and up */
-@media (min-width: 1500px) {
-    .max-height-bm-index {
-        padding-top: 0%;
-        padding-left: 8%;
-    }
-
-    .max-height-bm {
-        padding-top: 15%;
-        padding-left: 8%;
-    }
-}
-
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
