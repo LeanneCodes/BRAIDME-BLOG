@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'home',
     'products',
-    'django_summernote',
     'posts',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [

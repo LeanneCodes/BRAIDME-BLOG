@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col text-center mt-3">
-                <h2 class="logo-font">Blog Posts</h2>
+                <h2 class="logo-font">posts</h2>
                 <hr class="w-50 mb-1">
             </div>
         </div>
@@ -25,28 +25,26 @@
                     {% for post in posts %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
-                                {% if post.featured_image %}
+                                {% if post.image %}
                                 <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="{{ post.name }}">
                                 </a>
                                 {% else %}
                                 <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.name }}">
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0">
-                                    <p class="mb-0">{{ post.title }}</p>
+                                    <p class="mb-0">{{ post.name }}</p>
                                 </div>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.title }}</p>
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.excerpt }}</p>
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.likes }}</p>
-                                            {% if post.updated_on %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ post.updated_on }}</small>
+                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.price }}</p>
+                                            {% if post.rating %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ post.rating }} / 5</small>
                                             {% else %}
-                                                <small class="text-muted">{{ post.created_on }}</small>
+                                                <small class="text-muted">No Rating</small>
                                             {% endif %}
                                         </div>
                                     </div>
