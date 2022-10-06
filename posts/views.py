@@ -12,3 +12,15 @@ def all_posts(request):
         'posts': posts,
     }
     return render(request, 'posts/posts.html', context)
+
+
+def post_detail(request, post_id):
+    """ A view to show individual post details """
+
+    post = get_object_or_404(Post, pk=post_id)
+
+    context = {
+        'post': post,
+    }
+
+    return render(request, 'posts/post_detail.html', context)

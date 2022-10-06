@@ -10,16 +10,14 @@ SERVICE = (("Braids", "Braids"), ("Wigs", "Wigs"), ("Weaves", "Weaves"), ("Locs"
 
 class Stylist(models.Model):
     stylist_name = models.CharField(max_length=200)
+    brand_name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    brand_name = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="stylist_brand"
-    )
     stylist_email = models.EmailField(max_length=254)
     stylist_phone = models.CharField(max_length=11)
     brand_image = CloudinaryField('image', default='placeholder')
     specialty = models.CharField(max_length=15, choices=SERVICE, default=0)
     hairstyles = models.TextField()
-    price_from = models.DecimalField(max_digits=3, decimal_places=2)
+    price_from = models.DecimalField(max_digits=6, decimal_places=2)
     requirements = models.TextField()
     mobile = models.IntegerField(choices=STATUS, default=0)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)

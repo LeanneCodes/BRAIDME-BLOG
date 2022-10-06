@@ -12,3 +12,15 @@ def all_stylists(request):
         'stylists': stylists,
     }
     return render(request, 'stylists/stylists.html', context)
+
+
+def stylist_detail(request, stylist_id):
+    """ A view to show individual product details """
+
+    stylist = get_object_or_404(Stylist, pk=stylist_id)
+
+    context = {
+        'stylist': stylist,
+    }
+
+    return render(request, 'stylists/stylist_detail.html', context)
