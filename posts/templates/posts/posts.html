@@ -25,7 +25,7 @@
                     {% for post in posts %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
-                                {% if post.image %}
+                                {% if post.featured_image %}
                                 <a href="">
                                     <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="{{ post.name }}">
                                 </a>
@@ -35,16 +35,16 @@
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0">
-                                    <p class="mb-0">{{ post.name }}</p>
+                                    <p class="mb-0">{{ post.title }}</p>
                                 </div>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.price }}</p>
-                                            {% if post.rating %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ post.rating }} / 5</small>
+                                            <p class="lead mb-0 text-left font-weight-bold">${{ post.excerpt }}</p>
+                                            {% if post.updated_on %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ post.updated_on }}</small>
                                             {% else %}
-                                                <small class="text-muted">No Rating</small>
+                                                <small class="text-muted">{{ post.created_on }}</small>
                                             {% endif %}
                                         </div>
                                     </div>

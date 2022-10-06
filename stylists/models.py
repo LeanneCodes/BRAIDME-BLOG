@@ -1,0 +1,58 @@
+from django.db import models
+from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+from django_countries.fields import CountryField
+
+
+STATUS = ((0, "No"), (1, "Yes"))
+SERVICE = (("Braids", "Braids"), ("Wigs", "Wigs"), ("Weaves", "Weaves"), ("Locs", "Locs"), ("Men's Hair", "Men's Hair"), ("Natural Hair", "Natural Hair"), ("Kid's Hair", "Kid's Hair"))
+
+
+class Stylist(models.Model):
+    stylist_name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    brand_name = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="stylist_brand"
+    )
+    stylist_email = models.EmailField(max_length=254)
+    stylist_phone = models.CharField(max_length=11)
+    brand_image = CloudinaryField('image', default='placeholder')
+    specialty = models.CharField(max_length=15, choices=SERVICE, default=0)
+    hairstyles = models.TextField()
+    price_from = models.DecimalField(max_digits=3, decimal_places=2)
+    requirements = models.TextField()
+    mobile = models.IntegerField(choices=STATUS, default=0)
+    street_address1 = models.CharField(max_length=80, null=False, blank=False)
+    street_address2 = models.CharField(max_length=80, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40, null=False, blank=False)
+    county = models.CharField(max_length=80, null=True, blank=True)
+    country = CountryField(blank_label='Country *', null=False, blank=False)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+    likes = models.ManyToManyField(
+        User, related_name='stylist_like', blank=True)
+
+    class Meta:
+        ordering = ["price_from"]
+
+    def __str__(self):
+        return self.brand_name
+
+    def number_of_likes(self):
+        return self.likes.count()
+
+
+class Review(models.Model):
+    stylist = models.ForeignKey(Stylist, on_delete=models.CASCADE,
+                                related_name="reviews")
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    review_title = models.TextField(max_length=30)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Review {self.body} by {self.name}"
