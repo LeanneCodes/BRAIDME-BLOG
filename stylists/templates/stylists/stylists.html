@@ -50,11 +50,11 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border border-gray">
                                 {% if stylist.brand_image %}
-                                <a href="{% url 'stylist_detail' stylist.id %}">
+                                <a href="{% url 'stylists_detail' stylist.id %}">
                                     <img class="card-img-top img-fluid" src="{{ stylist.brand_image_url }}" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% else %}
-                                <a href="{% url 'stylist_detail' stylist.id %}">
+                                <a href="{% url 'stylists_detail' stylist.id %}">
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% endif %}
