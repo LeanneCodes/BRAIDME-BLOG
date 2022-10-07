@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'stylists',
     'results',
     'django_summernote',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
