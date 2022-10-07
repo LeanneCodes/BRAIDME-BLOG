@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container h-100">
+    <!-- <div class="container h-100">
         <div class="row h-100">
             <div class="col-7 col-md-6 my-auto">
                 <h1 class="display-4 logo-font text-black">
@@ -23,5 +23,84 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <style>
+        .carousel-item {
+            position: relative;
+            height: 100vh;
+            background: #777;
+            color: white;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-bottom: 250px;
+        }
+    </style>
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664811813/black_women_colour_tone_adjust_skbqor.png');">
+                <div class="container">
+                    <div class="col-7 col-md-6 my-auto">
+                        <h1 class="display-4 logo-font text-white">
+                            Shop merch
+                        </h1>
+                        <div class="my-5">
+                            <h4>
+                                <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664813557/alvin-balemesa-MYfq3tf34p8-unsplash_w6pgdz.jpg');">
+                <div class="container">
+                    <div class="col-7 col-md-6 my-auto">
+                        <h1 class="display-4 logo-font text-white">
+                            View blog
+                        </h1>
+                        <div class="my-5">
+                            <h4>
+                                <a href="{% url 'posts' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Read Now</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664811815/black_women_third_hero_image_fiswqn.jpg');">
+                <div class="container">
+                    <div class="col-7 col-md-6 my-auto">
+                        <h1 class="display-4 logo-font text-white">
+                            Stylist Finder
+                        </h1>
+                        <div class="my-5">
+                            <h4>
+                                <a href="{% url 'stylists' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Discover Now</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#myCarousel" class="carousel-control-prev" role="button" data-slide="prev">
+            <span class="sr-only">Previous</span>
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a href="#myCarousel" class="carousel-control-next" role="button" data-slide="next">
+            <span class="sr-only">Next</span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
     </div>
+    
+    
 {% endblock %}
