@@ -1,7 +1,24 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
 
-<div class="blog-background container-fluid blog-bottom-space">
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="row mb-4" style="margin-top: -35px;">
+    <div class="col text-center mt-3">
+        <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog</h2>
+    </div>
+</div>
+<div class="bg-white vh-100 pb-5" style="color: black; overflow-x: hidden;">
     <div class="container message-view">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -16,30 +33,22 @@
             </div>
         </div>
     </div>
-    <div class="masthead">
-        <div class="container">
+    <div class="masthead text-center">
+        <div class="container pt-4">
             <div class="row g-0">
-                <div class="col-md-6 masthead-text">
+                <div class="col-md-6 masthead-text" style="max-height: 40%; margin: auto;">
                     <!-- Post title goes in these h1 tags -->
-                    <h1 class="post-title">{{ post.title }}</h1>
+                    <h1 class="display-4">{{ post.title }}</h1>
                     <!-- Post author goes before the | the post's created date goes after -->
-                    <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
-                </div>
-                <div class="d-none d-md-block col-md-6 masthead-image">
-                    <!-- The featured image URL goes in the src attribute -->
-                    {% if "placeholder" in post.featured_image.url %}
-                    <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
-                    {% else %}
-                    <img src=" {{ post.featured_image.url }}" width="100%">
-                    {% endif %}
+                    <p>By {{ post.author }}, posted on {{ post.updated }}</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="container raise">
+    <hr class="w-50 mb-1">
+    <div class="container">
         <div class="row">
-            <div class="col card mb-4  mt-3 left top">
+            <div class="col card border-0 mb-4  mt-3 left top">
                 <div class="card-body">
                     <!-- The post content goes inside the card-text. -->
                     <!-- Use the | safe filter inside the template tags -->
@@ -47,16 +56,15 @@
                         {{ post.content | safe }}
                     </p>
                     <div class="row">
-
                         <div class="col-1">
                             <strong>
                                 {% if user.is_authenticated %}
                                 <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                     {% csrf_token %}
                                     {% if liked %}
-                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="fas fa-heart"></i></button>
+                                    <a type="submit" name="blogpost_id" value="{{post.slug}}"><i class="fa-solid fa-heart"></i></a>
                                     {% else %}
-                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i class="far fa-heart"></i></button>
+                                    <a type="submit" name="blogpost_id" value="{{post.slug}}"><i class="fa-regular fa-heart"></i></a>
                                     {% endif %}
                                 </form>
                                 {% else %}
@@ -84,7 +92,7 @@
         </div>
         <div class="row">
             <div class="col-md-8 card mb-4  mt-3 ">
-                <h3 class="pl-4">Comments:</h3>
+                <h3 class="pl-4 pt-4">Comments:</h3>
                 <div class="card-body">
                     <!-- We want a for loop inside the empty control tags to iterate through each comment in comments -->
                     {% for comment in comments %}
@@ -107,21 +115,21 @@
             <div class="col-md-4 card mb-4  mt-3 ">
                 <div class="card-body">
                     <!-- For later -->
-                    {% if commented %}
-                    <div class="alert alert-success" role="alert">
-                        Your comment is awaiting approval
-                    </div>
-                    {% else %}
                     {% if user.is_authenticated %}
-    
-                    <h3>Leave a comment:</h3>
-                    <p>Posting as: {{ user.username }}</p>
-                    <form method="post" style="margin-top: 1.3em;">
-                        {{ comment_form | crispy }}
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-lg btn-light blog-submit">Submit</button>
-                    </form>
-                    {% endif %}
+                        <h3>Leave a comment:</h3>
+                        <p>Posting as: {{ user.username }}</p>
+                        <form method="post" style="margin-top: 1.3em;">
+                            {{ comment_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-lg btn-light blog-submit">Submit</button>
+                        </form>
+                        {% else %}
+                        <p>Please login to leave a comment</p>
+                        {% endif %}
+                    {% if commented %}
+                        <div class="alert alert-success" role="alert">
+                            Your comment is awaiting approval
+                        </div>
                     {% endif %}
                 </div>
             </div>
