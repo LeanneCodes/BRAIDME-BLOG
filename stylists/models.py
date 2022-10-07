@@ -9,15 +9,16 @@ SERVICE = (("Braids", "Braids"), ("Wigs", "Wigs"), ("Weaves", "Weaves"), ("Locs"
 
 
 class Stylist(models.Model):
-    stylist_name = models.CharField(max_length=200)
-    brand_name = models.CharField(max_length=200)
+    stylist = models.CharField(max_length=200)
+    brand = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     stylist_email = models.EmailField(max_length=254)
     stylist_phone = models.CharField(max_length=11)
     brand_image = CloudinaryField('image', default='placeholder')
+    brand_image_url = models.URLField(max_length=1024, null=True, blank=True)
     specialty = models.CharField(max_length=15, choices=SERVICE, default=0)
     hairstyles = models.TextField()
-    price_from = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     requirements = models.TextField()
     mobile = models.IntegerField(choices=STATUS, default=0)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
@@ -30,10 +31,10 @@ class Stylist(models.Model):
         User, related_name='stylist_like', blank=True)
 
     class Meta:
-        ordering = ["price_from"]
+        ordering = ["price"]
 
     def __str__(self):
-        return self.brand_name
+        return self.brand
 
     def number_of_likes(self):
         return self.likes.count()

@@ -14,37 +14,61 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col text-center mt-3">
-                <h2 class="logo-font">stylists</h2>
+                <h2 class="logo-font text-white">Stylist Finder</h2>
                 <hr class="w-50 mb-1">
             </div>
         </div>
         <div class="row">
             <div class="product-container col-10 offset-1">
-                <div class="row mt-1 mb-2"></div>
+                <div class="row mt-1 mb-2">
+                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                        <div class="sort-select-wrapper w-50">
+                            <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                <option value="likes_asc" {% if current_sorting == 'likes_asc' %}selected{% endif %}>Most Favourited (low to high)</option>
+                                <option value="likes_desc" {% if current_sorting == 'likes_desc' %}selected{% endif %}>Most Favourited (high to low)</option>
+                                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                <option value="stylist_asc" {% if current_sorting == 'stylist_asc' %}selected{% endif %}>Stylist Name (A-Z)</option>
+                                <option value="stylist_desc" {% if current_sorting == 'stylist_desc' %}selected{% endif %}>Stylist Name (Z-A)</option>
+                                <option value="brand_asc" {% if current_sorting == 'brand_asc' %}selected{% endif %}>Brand Name (A-Z)</option>
+                                <option value="brand_desc" {% if current_sorting == 'brand_desc' %}selected{% endif %}>Brand Name (Z-A)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-first">
+                        <p class="text-muted mt-3 text-center text-md-left">
+                            {% if search_term or current_categories or current_sorting != 'None_None' %}
+                                <span class="small"><a href="{% url 'stylists' %}">Stylists Home</a> | </span>
+                            {% endif %}
+                            {{ stylists|length }} Stylists{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                        </p>
+                    </div>
+                </div>
                 <div class="row">
                     {% for stylist in stylists %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
                                 {% if stylist.brand_image %}
                                 <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ stylist.brand_image }}" alt="{{ stylist.brand_name }}">
+                                    <img class="card-img-top img-fluid" src="{{ stylist.brand_image_url }}" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% else %}
                                 <a href="">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ stylist.name }}">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0">
-                                    <p class="mb-0">{{ stylist.name }}</p>
+                                    <p class="mb-0">{{ stylist.brand }}</p>
                                 </div>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ stylist.specialty }}</p>
-                                            {% if stylist.updated_on %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ stylist.updated_on }}</small>
+                                            <p class="lead mb-0 text-left font-weight-bold">{{ stylist.specialty }}</p>
+                                            {% if stylist.mobile %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ stylist.mobile }}</small>
                                             {% else %}
-                                                <small class="text-muted">{{ stylist.price_from }}</small>
+                                                <small class="text-muted">{{ stylist.county }}</small>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -76,4 +100,41 @@
             </div>
         </div>
     </div>
+    <div class="btt-button shadow-sm rounded-0 border border-black">
+        <a class="btt-link d-flex h-100">
+            <i class="fas fa-arrow-up text-white mx-auto my-auto"></i>
+        </a>	
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+    
+    <script type="text/javascript">
+        $('#sort-selector').change(function() {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if(selectedVal != "reset"){
+                var sort = selectedVal.split("_")[0];
+                var direction = selectedVal.split("_")[1];
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 {% endblock %}

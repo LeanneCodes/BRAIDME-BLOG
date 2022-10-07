@@ -13,6 +13,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
     featured_image = CloudinaryField('image', default='placeholder')
+    featured_image_url = models.URLField(max_length=1024, null=True, blank=True)
     excerpt = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()

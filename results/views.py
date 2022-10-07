@@ -24,7 +24,7 @@ def all_results(request):
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse('results'))
 
-            stylist_queries = Q(stylist_name__icontains=query) | Q(brand_name__icontains=query) | Q(specialty__icontains=query) | Q(requirements__icontains=query)
+            stylist_queries = Q(stylist__icontains=query) | Q(brand__icontains=query) | Q(specialty__icontains=query) | Q(requirements__icontains=query)
             stylists = stylists.filter(stylist_queries)
             product_queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(product_queries)
