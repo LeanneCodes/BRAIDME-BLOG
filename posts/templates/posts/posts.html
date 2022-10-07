@@ -43,7 +43,7 @@
                 </div>
                 <div class="row">
                     {% for post in posts %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
                             <div class="card h-100 border-0">
                                 {% if post.featured_image %}
                                 <a href="">
@@ -55,22 +55,27 @@
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0">
-                                    <p class="mb-0">{{ post.title }}</p>
+                                    <p class="lead mb-0">{{ post.title }}</p>
+                                    <h6 class="mb-0">By {{ post.author }}</h6>
                                 </div>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">{{ post.excerpt }}</p>
-                                            {% if post.updated_on %}
-                                                <small class="text-muted-card"><i class="fas fa-star mr-1"></i>{{ post.updated_on }}</small>
+                                            {% if post.created_on != post.updated_on %}
+                                            <p class="mb-0 text-left font-weight-bold">Updated on: {{ post.updated_on }}</p>
                                             {% else %}
-                                                <small class="text-muted-card">{{ post.created_on }}</small>
+                                            <p class="mb-0 text-left font-weight-bold">Posted on: {{ post.created_on }}</p>
+                                            {% endif %}
+                                            {% if post.likes.count != 0 %}
+                                            <p class="mb-0 text-left font-weight-bold">{{ post.likes.count }} <i class="fa-solid fa-heart"></i></p>
+                                            {% else %}
+                                            <p class="mb-0 text-left font-weight-bold">{{ post.likes.count }} <i class="fa-regular fa-heart"></i></p>
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                         {% if forloop.counter|divisibleby:1 %}
                             <div class="col-12 d-sm-none mt-3 mb-3">
                                 <hr>

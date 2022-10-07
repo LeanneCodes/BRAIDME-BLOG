@@ -59,16 +59,18 @@
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0">
-                                    <p class="mb-0">{{ stylist.brand }}</p>
+                                    <p class="lead mb-0">{{ stylist.brand }}</p>
+                                    <h6 class="mb-0">Stylist: {{ stylist.stylist }}</h6>
                                 </div>
+                                <br>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">{{ stylist.specialty }}</p>
-                                            {% if stylist.mobile %}
-                                                <small class="text-muted-card"><i class="fas fa-star mr-1"></i>{{ stylist.mobile }}</small>
+                                            <p class="mb-0 text-left font-weight-bold">Hair Specialty: {{ stylist.specialty }}</p>
+                                            {% if stylist.likes.count != 0 %}
+                                            <p class="mb-0 text-left font-weight-bold">{{ stylist.likes.count }} <i class="fa-solid fa-heart"></i></p>
                                             {% else %}
-                                                <small class="text-muted-card">{{ stylist.county }}</small>
+                                            <p class="mb-0 text-left font-weight-bold">{{ stylist.likes.count }} <i class="fa-regular fa-heart"></i></p>
                                             {% endif %}
                                         </div>
                                     </div>

@@ -51,9 +51,9 @@
                 <div class="row mt-1 mb-2">
                     <div class="product-container col-10 offset-1">
                         <div class="row mt-1 mb-2"></div>
-                        <!-- <div class="row">
+                        <div class="row">
                             {% for product in products %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
                                     <div class="card h-100 border-0">
                                         {% if product.image %}
                                         <a href="">
@@ -65,51 +65,24 @@
                                         </a>
                                         {% endif %}
                                         <div class="card-body pb-0">
-                                            <p class="mb-0">{{ product.name }}</p>
+                                            <p class="lead mb-0">{{ product.name }}</p>
                                         </div>
                                         <div class="card-footer bg-white pt-0 border-0 text-left">
                                             <div class="row">
                                                 <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-                                                    {% if product.rating %}
-                                                        <small class="text-muted-card"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
-                                                    {% else %}
-                                                        <small class="text-muted-card">No Rating</small>
-                                                    {% endif %}
+                                                    <p class="lead mb-0 text-left font-weight-bold">£{{ product.price }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                {% if forloop.counter|divisibleby:1 %}
-                                    <div class="col-12 d-sm-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}                        
-                                {% if forloop.counter|divisibleby:2 %}
-                                    <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:3 %}
-                                    <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:4 %}
-                                    <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="row">
+                                </div> 
+                            {% endfor %}  
                             {% for post in posts %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
                                     <div class="card h-100 border-0">
                                         {% if post.featured_image %}
                                         <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ post.featured_image_url }}" alt="{{ post.title }}">
+                                            <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                                         </a>
                                         {% else %}
                                         <a href="">
@@ -117,47 +90,30 @@
                                         </a>
                                         {% endif %}
                                         <div class="card-body pb-0">
-                                            <p class="mb-0">{{ post.title }}</p>
+                                            <p class="lead mb-0">{{ post.title }}</p>
+                                            <h6 class="mb-0">By {{ post.author }}</h6>
                                         </div>
                                         <div class="card-footer bg-white pt-0 border-0 text-left">
                                             <div class="row">
                                                 <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">{{ post.excerpt }}</p>
-                                                    {% if post.updated_on %}
-                                                        <small class="text-muted-card"><i class="fas fa-star mr-1"></i>{{ post.updated_on }}</small>
+                                                    {% if post.created_on != post.updated_on %}
+                                                    <p class="mb-0 text-left font-weight-bold">Updated on: {{ post.updated_on }}</p>
                                                     {% else %}
-                                                        <small class="text-muted-card">{{ post.created_on }}</small>
+                                                    <p class="mb-0 text-left font-weight-bold">Posted on: {{ post.created_on }}</p>
+                                                    {% endif %}
+                                                    {% if post.likes.count != 0 %}
+                                                    <p class="mb-0 text-left font-weight-bold">{{ post.likes.count }} <i class="fa-solid fa-heart"></i></p>
+                                                    {% else %}
+                                                    <p class="mb-0 text-left font-weight-bold">{{ post.likes.count }} <i class="fa-regular fa-heart"></i></p>
                                                     {% endif %}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                {% if forloop.counter|divisibleby:1 %}
-                                    <div class="col-12 d-sm-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}                        
-                                {% if forloop.counter|divisibleby:2 %}
-                                    <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:3 %}
-                                    <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:4 %}
-                                    <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
+                                </div>  
                             {% endfor %}
-                        </div>
-                        <div class="row">
                             {% for stylist in stylists %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
                                     <div class="card h-100 border-0">
                                         {% if stylist.brand_image %}
                                         <a href="">
@@ -169,119 +125,19 @@
                                         </a>
                                         {% endif %}
                                         <div class="card-body pb-0">
-                                            <p class="mb-0">{{ stylist.brand }}</p>
+                                            <p class="lead mb-0">{{ stylist.brand }}</p>
+                                            <h6 class="mb-0">Stylist: {{ stylist.stylist }}</h6>
                                         </div>
+                                        <br>
                                         <div class="card-footer bg-white pt-0 border-0 text-left">
                                             <div class="row">
                                                 <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">{{ stylist.specialty }}</p>
-                                                    {% if stylist.mobile %}
-                                                        <small class="text-muted-card"><i class="fas fa-star mr-1"></i>{{ stylist.mobile }}</small>
+                                                    <p class="mb-0 text-left font-weight-bold">Hair Specialty: {{ stylist.specialty }}</p>
+                                                    {% if stylist.likes.count != 0 %}
+                                                    <p class="mb-0 text-left font-weight-bold">{{ stylist.likes.count }} <i class="fa-solid fa-heart"></i></p>
                                                     {% else %}
-                                                        <small class="text-muted-card">{{ stylist.county }}</small>
+                                                    <p class="mb-0 text-left font-weight-bold">{{ stylist.likes.count }} <i class="fa-regular fa-heart"></i></p>
                                                     {% endif %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% if forloop.counter|divisibleby:1 %}
-                                    <div class="col-12 d-sm-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}                        
-                                {% if forloop.counter|divisibleby:2 %}
-                                    <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:3 %}
-                                    <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:4 %}
-                                    <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div> -->
-                        <div class="row">
-                            {% for product in products %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100 border-0">
-                                        {% if product.image %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-                                        </a>
-                                        {% else %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                        </a>
-                                        {% endif %}
-                                        <div class="card-body pb-0">
-                                            <p class="mb-0">{{ product.name }}</p>
-                                        </div>
-                                        <div class="card-footer bg-white pt-0 border-0 text-left">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">£{{ product.price }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                            {% endfor %}  
-                            {% for post in posts %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100 border-0">
-                                        {% if post.featured_image %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ product.featured_image.url }}" alt="{{ post.title }}">
-                                        </a>
-                                        {% else %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
-                                        </a>
-                                        {% endif %}
-                                        <div class="card-body pb-0">
-                                            <p class="mb-0">{{ post.title }}</p>
-                                            <p class="mb-0">{{ post.author }}</p>
-                                        </div>
-                                        <div class="card-footer bg-white pt-0 border-0 text-left">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">{{ post.created_on }}</p>
-                                                    <p class="lead mb-0 text-left font-weight-bold">{{ post.updated_on }}</p>
-                                                    <p class="lead mb-0 text-left font-weight-bold">{{ post.likes }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                            {% endfor %}
-                            {% for stylist in stylists %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100 border-0">
-                                        {% if stylist.brand_image %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ stylist.brand_image_url }}" alt="{{ stylist.brand }}">
-                                        </a>
-                                        {% else %}
-                                        <a href="">
-                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ stylist.brand }}">
-                                        </a>
-                                        {% endif %}
-                                        <div class="card-body pb-0">
-                                            <p class="mb-0">{{ stylist.brand }}</p>
-                                            <p class="mb-0">{{ stylist.stylist }}</p>
-                                            <p class="mb-0">{{ stylist.specialty }}</p>
-                                        </div>
-                                        <div class="card-footer bg-white pt-0 border-0 text-left">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p class="lead mb-0 text-left font-weight-bold">Price from £{{ stylist.price }}</p>
                                                 </div>
                                             </div>
                                         </div>
