@@ -1,5 +1,5 @@
 function changeTopnav() {
-    var navbar = document.getElementById('navbar-bm');
+    var navbar = document.getElementById('topnav');
     var scrollvalue = window.scrollY;
     console.log(scrollvalue);
     if(scrollvalue < 30) {

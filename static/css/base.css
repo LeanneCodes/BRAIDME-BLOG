@@ -9,13 +9,16 @@ html {
 }
 
 body {
-    /* background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height: calc(100vh - 164px);
-    color: #555;
-    font-family: 'Lato'; */
     font-family: 'Roboto', serif !important;
     color: whitesmoke;
+}
+
+.card {
+    color: rgb(45, 45, 45);
+}
+
+.text-muted-card {
+    color: rgb(45, 45, 45);
 }
 
 /* from Bulma */
@@ -23,6 +26,10 @@ body {
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
     border: 1px solid white;
+}
+
+.border-circle {
+    border-radius: 50% !important;
 }
 
 .btn-white {
@@ -91,7 +98,7 @@ body {
 	top: 0;
 	left: 0;
 	position: fixed;
-	background: #222;
+    background: #DFB166;
 	z-index: -1;
 }
 
@@ -105,6 +112,20 @@ body {
 
 .btt-link {
     cursor: pointer;
+}
+
+/* Products */
+.text-muted {
+    color: whitesmoke !important;
+}
+
+.topnav-color {
+    background-color: #DFB166 !important;
+    transition: all 1s;
+}
+
+.topnav {
+    background-color: transparent;
 }
 
 /* -------------------------------- Media Queries */
