@@ -15,15 +15,15 @@ class Post(models.Model):
     featured_image = CloudinaryField('image', default='placeholder')
     featured_image_url = models.URLField(max_length=1024, null=True, blank=True)
     excerpt = models.TextField(blank=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now=True)
     content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(
         User, related_name='blogpost_like', blank=True)
 
     class Meta:
-        ordering = ["-created_on"]
+        ordering = ["-created"]
 
     def __str__(self):
         return self.title
@@ -38,11 +38,11 @@ class Comment(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["created_on"]
+        ordering = ["created"]
 
     def __str__(self):
         return f"Comment {self.body} by {self.name}"

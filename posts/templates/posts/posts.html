@@ -10,96 +10,151 @@
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container-fluid">
-        <div class="row" style="margin-top: -35px;">
-            <div class="col text-center mt-3">
-                <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog</h2>
-                <hr class="w-50 mb-1">
-            </div>
+<div class="overlay"></div>
+<div class="container-fluid">
+    <div class="row" style="margin-top: -35px;">
+        <div class="col text-center mt-3">
+            <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog</h2>
+            <hr class="w-50 mb-1">
         </div>
-        <div class="row bg-white mt-3 vh-100">
-            <div class="product-container col-10 offset-1 pr-3 pl-3">
-                <div class="row mt-1 mb-2">
-                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
-                        <div class="sort-select-wrapper w-50">
-                            <select id="sort-selector" class="custom-select custom-select-sm border border-{% if current_sorting != 'None_None' %}grey{% else %}grey{% endif %}">
-                                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                                <option value="author_asc" {% if current_sorting == 'author_asc' %}selected{% endif %}>Author (A-Z)</option>
-                                <option value="author_desc" {% if current_sorting == 'author_desc' %}selected{% endif %}>Author (Z-A)</option>
-                                <option value="title_asc" {% if current_sorting == 'title_asc' %}selected{% endif %}>Blog Title (A-Z)</option>
-                                <option value="title_desc" {% if current_sorting == 'title_desc' %}selected{% endif %}>Blog Title (Z-A)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 order-md-first">
-                        <p class="text-muted mt-3 text-center text-md-left">
-                            {% if search_term or current_categories or current_sorting != 'None_None' %}
-                                <span><a href="{% url 'posts' %}" style="color: white;">Posts Home</a> | </span>
-                            {% endif %}
-                            {{ posts|length }} Posts{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
-                        </p>
+    </div>
+    <div class="row bg-white mt-3 vh-100">
+        <div class="product-container col-10 offset-1 pr-3 pl-3">
+            <div class="row mt-1 mb-2">
+                <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                    <div class="sort-select-wrapper w-50">
+                        <select id="sort-selector" class="custom-select custom-select-sm border border-{% if current_sorting != 'None_None' %}grey{% else %}grey{% endif %}">
+                            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                            <option value="author_asc" {% if current_sorting == 'author_asc' %}selected{% endif %}>Author (A-Z)</option>
+                            <option value="author_desc" {% if current_sorting == 'author_desc' %}selected{% endif %}>Author (Z-A)</option>
+                            <option value="title_asc" {% if current_sorting == 'title_asc' %}selected{% endif %}>Blog Title (A-Z)</option>
+                            <option value="title_desc" {% if current_sorting == 'title_desc' %}selected{% endif %}>Blog Title (Z-A)</option>
+                            <option value="updated_asc" {% if current_sorting == 'updated_asc' %}selected{% endif %}>Posted (Old to New)</option>
+                            <option value="updated_desc" {% if current_sorting == 'updated_desc' %}selected{% endif %}>Posted (New to Old)</option>
+                        </select>
                     </div>
                 </div>
-                <div class="row">
-                    {% for post in posts %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-                            <div class="card border-gray h-100">
-                                {% if post.featured_image %}
-                                <a href="{% url 'post_detail' post.slug %}">
-                                    <img class="card-img-top img-fluid" src="{{ post.featured_image_url }}" alt="{{ post.title }}">
-                                </a>
-                                {% else %}
-                                <a href="{% url 'post_detail' post.slug %}">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
-                                </a>
-                                {% endif %}
-                                <div class="card-body pb-0 text-center">
-                                    <p class="lead mb-0">{{ post.title }}</p>
-                                    <h6 class="mb-0">By {{ post.author }}</h6>
-                                </div>
-                                <br>
-                                <div class="card-footer bg-white pt-0 border-0 text-center">
-                                    <div class="row">
-                                        <div class="col">
-                                            {% if post.created_on != post.updated_on %}
-                                            <p class="mb-0 text-center font-weight-bold">Updated on: {{ post.updated_on }}</p>
-                                            {% else %}
-                                            <p class="mb-0 text-center font-weight-bold">Posted on: {{ post.created_on }}</p>
-                                            {% endif %}
-                                            <br>
-                                            {% if post.likes.count != 0 %}
-                                            <p class="mb-0 text-center font-weight-bold">{{ post.likes.count }} <i class="fa-solid fa-heart"></i></p>
-                                            {% else %}
-                                            <p class="mb-0 text-center font-weight-bold">{{ post.likes.count }} <i class="fa-regular fa-heart"></i></p>
-                                            {% endif %}
-                                        </div>
+                <div class="col-12 col-md-6 order-md-first">
+                    <p class="text-muted mt-3 text-center text-md-left">
+                        {% if search_term or current_categories or current_sorting != 'None_None' %}
+                            <span><a href="{% url 'posts' %}" style="color: gray;">Blog Posts</a> | </span>
+                        {% endif %}
+                        {{ posts|length }} Posts{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div class="card border-gray h-100">
+                            {% if post.featured_image %}
+                            <a href="{% url 'post_detail' post.slug %}">
+                                <img class="card-img-top img-fluid" src="{{ post.featured_image_url }}" alt="{{ post.title }}">
+                            </a>
+                            {% else %}
+                            <a href="{% url 'post_detail' post.slug %}">
+                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
+                            </a>
+                            {% endif %}
+                            <div class="card-body pb-0 text-center">
+                                <p class="lead mb-0">{{ post.title }}</p>
+                                <h6 class="mb-0">By {{ post.author }}</h6>
+                            </div>
+                            <br>
+                            <div class="card-footer bg-white pt-0 border-0 text-center">
+                                <div class="row">
+                                    <div class="col">
+                                        {% if post.created != post.updated %}
+                                        <p class="mb-0 text-center font-weight-bold">Updated on: {{ post.updated }}</p>
+                                        {% else %}
+                                        <p class="mb-0 text-center font-weight-bold">Posted on: {{ post.created }}</p>
+                                        {% endif %}
+                                        <br>
+                                        {% if post.likes.count != 0 %}
+                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-solid fa-heart"></i></p>
+                                        {% else %}
+                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-regular fa-heart"></i></p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                        </div>  
-                        {% if forloop.counter|divisibleby:1 %}
-                            <div class="col-12 d-sm-none mt-3 mb-3">
-                                <hr>
+                        </div>
+                    </div>  
+                    {% if forloop.counter|divisibleby:1 %}
+                        <div class="col-12 d-sm-none mt-3 mb-3">
+                            <hr>
+                        </div>
+                    {% endif %}                        
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:3 %}
+                        <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
+                            <hr>
+                        </div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:4 %}
+                        <div class="col-12 d-none d-xl-block mt-3 mb-3">
+                            <hr>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Prev </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}    
+</div>
+        
+<!-- Blog Entries Column -->
+        <!-- <div class="col-12 left blog-margin">
+            <div class="row">
+                {% for post in post_list %}
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-body ">
+                            <div class="image-container">
+                                {% if "placeholder" in post.featured_image.url %}
+                                <img class="card-img-top"
+                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
+                                {% else %}
+                                <img class="card-img-top rounded-6" src=" {{ post.featured_image.url }}">
+                                {% endif %}
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ post.author }}</p>
+                                </div>
                             </div>
-                        {% endif %}                        
-                        {% if forloop.counter|divisibleby:2 %}
-                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                                <hr>
+                            <div class="title-container">
+                                <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                                    <h2 class="card-title">{{ post.title }}</h2>
+                                    <p class="card-text">{{ post.excerpt }}</p>
+                                </a>
+                                <hr />
+                                <p class="card-text text-muted h6">{{ post.created}} <i class="far fa-heart"></i>
+                                    {{ post.number_of_likes }}</p>
                             </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:3 %}
-                            <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                                <hr>
-                            </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:4 %}
-                            <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                                <hr>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                        </div>
+                    </div>
                 </div>
+                {% if forloop.counter|divisibleby:4 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+
             </div>
         </div>
     </div>
@@ -116,22 +171,18 @@
         </ul>
     </nav>
     {% endif %}
-    <div class="btt-button shadow-sm rounded-0 border border-circle">
-        <a class="btt-link d-flex h-100">
-            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-        </a>	
-    </div>
+</div> -->
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
-    <script type="text/javascript">
+    <script>
 		$('.btt-link').click(function(e) {
-			window.scrollTo(0,0)
-		})
+			window.scrollTo(0,0);
+		});
 	</script>
     
-    <script type="text/javascript">
+    <script>
         $('#sort-selector').change(function() {
             var selector = $(this);
             var currentUrl = new URL(window.location);
@@ -151,6 +202,6 @@
 
                 window.location.replace(currentUrl);
             }
-        })
+        });
     </script>
 {% endblock %}
