@@ -10,25 +10,11 @@
 {% endblock %}
 
 {% block content %}
-    <!-- <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="display-4 logo-font text-black">
-                    The new collections are here
-                </h1>
-                <div class="my-5">
-                    <h4>
-                        <a href="" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
-                    </h4>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <style>
         .carousel-item {
             position: relative;
             height: 100vh;
-            background: #777;
+            background: black;
             color: white;
             background-position: center;
             background-size: cover;
@@ -52,12 +38,12 @@
             <div class="carousel-item active" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664811813/black_women_colour_tone_adjust_skbqor.png');">
                 <div class="container">
                     <div class="col-7 col-md-6 my-auto">
-                        <h1 class="display-4 logo-font text-white">
-                            Shop merch
+                        <h1 class="display-4 text-white">
+                            Shop <span class="logo-font">BRAIDME</span>
                         </h1>
                         <div class="my-5">
                             <h4>
-                                <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
+                                <a href="{% url 'products' %}" class="shop-now-button btn btn-lg text-uppercase py-3">Shop Now</a>
                             </h4>
                         </div>
                     </div>
@@ -66,12 +52,12 @@
             <div class="carousel-item" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664813557/alvin-balemesa-MYfq3tf34p8-unsplash_w6pgdz.jpg');">
                 <div class="container">
                     <div class="col-7 col-md-6 my-auto">
-                        <h1 class="display-4 logo-font text-white">
-                            View blog
+                        <h1 class="display-4 text-white">
+                            <span class="logo-font">BRAIDME</span> Blog
                         </h1>
                         <div class="my-5">
                             <h4>
-                                <a href="{% url 'posts' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Read Now</a>
+                                <a href="{% url 'posts' %}" class="shop-now-button btn btn-lg text-uppercase py-3">Read Now</a>
                             </h4>
                         </div>
                     </div>
@@ -80,12 +66,12 @@
             <div class="carousel-item" data-interval="5000" style="background-image: url('https://res.cloudinary.com/darxyuwht/image/upload/v1664811815/black_women_third_hero_image_fiswqn.jpg');">
                 <div class="container">
                     <div class="col-7 col-md-6 my-auto">
-                        <h1 class="display-4 logo-font text-white">
+                        <h1 class="display-4 text-white">
                             Stylist Finder
                         </h1>
                         <div class="my-5">
                             <h4>
-                                <a href="{% url 'stylists' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Discover Now</a>
+                                <a href="{% url 'stylists' %}" class="shop-now-button btn btn-lg text-uppercase py-3">Discover Now</a>
                             </h4>
                         </div>
                     </div>

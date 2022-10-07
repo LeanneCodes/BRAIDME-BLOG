@@ -2,25 +2,50 @@ html {
     height: 100%;
 }
 
+.logo-font {
+    font-family: 'Roboto Slab', serif !important;
+    color: whitesmoke;
+    letter-spacing: 0.5rem !important;
+}
+
 body {
     /* background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Lato'; */
+    font-family: 'Roboto', serif !important;
+    color: whitesmoke;
 }
 
 /* from Bulma */
+.border-white-bm {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: 1px solid white;
+}
+
+.btn-white {
+    background-color: white !important;
+    color: black !important;
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+    border: 1px solid white;
+
+}
+
+.btn-cta {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid white;
+}
+
 .icon {
     align-items: center;
     display: inline-flex;
     justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
-}
-
-.logo-font {
-    text-transform: uppercase;
 }
 
 .main-logo-link {
