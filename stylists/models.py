@@ -5,6 +5,7 @@ from django_countries.fields import CountryField
 
 
 STATUS = ((0, "No"), (1, "Yes"))
+LIVE = ((0, "No"), (1, "Yes"))
 SERVICE = (("Braids", "Braids"), ("Wigs", "Wigs"), ("Weaves", "Weaves"), ("Locs", "Locs"), ("Men's Hair", "Men's Hair"), ("Natural Hair", "Natural Hair"), ("Kid's Hair", "Kid's Hair"))
 
 
@@ -20,6 +21,7 @@ class Stylist(models.Model):
     hairstyles = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     requirements = models.TextField()
+    website = models.URLField(max_length=200, default='')
     mobile = models.IntegerField(choices=STATUS, default=0)
     street_address1 = models.CharField(max_length=80, null=False, blank=False)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
@@ -27,6 +29,7 @@ class Stylist(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     country = CountryField(blank_label='Country *', null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
+    live = models.IntegerField(choices=LIVE, default=0)
     likes = models.ManyToManyField(
         User, related_name='stylist_like', blank=True)
 

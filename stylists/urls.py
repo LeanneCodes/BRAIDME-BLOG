@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.all_stylists, name='stylists'),
-    path('<stylist_id>', views.stylists_detail, name='stylists_detail'),
+    path("", views.StylistList.as_view(), name="stylists"),
+    path('<slug:slug>/', views.StylistDetail.as_view(), name='stylist_detail'),
+    path('like/<slug:slug>', views.StylistLike.as_view(), name='stylist_like'),
 ]

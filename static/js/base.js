@@ -14,3 +14,4 @@ window.addEventListener('scroll', changeTopnav);
 setTimeout(() => {
     $('.alert').alert('close')
 }, 5000)
+

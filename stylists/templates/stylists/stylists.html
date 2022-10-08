@@ -18,7 +18,7 @@
                 <hr class="w-50 mb-1">
             </div>
         </div>
-        <div class="row bg-white mt-3 vh-100">
+        <div class="row bg-white mt-3" style="min-height: 100vh;">
             <div class="product-container col-10 offset-1">
                 <div class="row mt-1 mb-2">
                     <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
@@ -50,11 +50,11 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border border-gray">
                                 {% if stylist.brand_image %}
-                                <a href="{% url 'stylists_detail' stylist.id %}">
+                                <a href="{% url 'stylist_detail' stylist.slug %}">
                                     <img class="card-img-top img-fluid" src="{{ stylist.brand_image_url }}" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% else %}
-                                <a href="{% url 'stylists_detail' stylist.id %}">
+                                <a href="{% url 'stylist_detail' stylist.slug %}">
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ stylist.stylist }}">
                                 </a>
                                 {% endif %}
