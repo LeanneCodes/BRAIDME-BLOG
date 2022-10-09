@@ -57,12 +57,12 @@
                         <div class="col-1">
                             <strong>
                                 {% if user.is_authenticated %}
-                                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                                <form class="d-inline" action="{% url 'post_like' post.id %}" method="POST">
                                     {% csrf_token %}
                                     {% if liked %}
-                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like-bm"><i class="fas fa-heart"></i></button>
+                                    <button type="submit" name="blogpost_id" value="{{post.id}}" class="btn-like-bm"><i class="fas fa-heart"></i></button>
                                     {% else %}
-                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like-bm"><i class="far fa-heart"></i></button>
+                                    <button type="submit" name="blogpost_id" value="{{post.id}}" class="btn-like-bm"><i class="far fa-heart"></i></button>
                                     {% endif %}
                                 </form>
                                 {% else %}

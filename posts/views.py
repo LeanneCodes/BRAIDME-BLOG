@@ -50,9 +50,9 @@ class PostList(generic.ListView):
 
 class PostDetail(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, post_id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(Post, pk=post_id)
         comments = post.comments.filter(approved=True).order_by("-created")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -70,10 +70,10 @@ class PostDetail(View):
             },
         )
 
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, post_id, *args, **kwargs):
 
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(Post, pk=post_id)
         comments = post.comments.filter(approved=True).order_by("-created")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -106,14 +106,14 @@ class PostDetail(View):
 
 class PostLike(View):
 
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def post(self, request, post_id, *args, **kwargs):
+        post = get_object_or_404(Post, pk=post_id)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
 
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('post_detail', args=[post.id]))
 
 
 def add_post(request):
@@ -121,9 +121,9 @@ def add_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save()
             messages.success(request, 'Successfully added post!')
-            return redirect(reverse('add_post'))
+            return redirect(reverse('post_detail', args=[post.id]))
         else:
             messages.error(request, 'Failed to add post. Please ensure the form is valid.')
     else:
@@ -145,7 +145,7 @@ def edit_post(request, post_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated post!')
-            return redirect(reverse('post_detail', args=[post.slug]))
+            return redirect(reverse('post_detail', args=[post.id]))
         else:
             messages.error(request, 'Failed to update post. Please ensure the form is valid.')
     else:
@@ -159,3 +159,11 @@ def edit_post(request, post_id):
     }
 
     return render(request, template, context)
+
+
+def delete_post(request, post_id):
+    """ Delete a post """
+    post = get_object_or_404(Post, pk=post_id)
+    post.delete()
+    messages.success(request, 'Post deleted!')
+    return redirect(reverse('posts'))

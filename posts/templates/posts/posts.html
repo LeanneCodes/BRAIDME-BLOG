@@ -47,11 +47,11 @@
                 <div class="col-md-3 mb-1 mt-1">
                     <div class="card border-gray h-100">
                         {% if post.featured_image %}
-                        <a href="{% url 'post_detail' post.slug %}">
+                        <a href="{% url 'post_detail' post.id %}">
                             <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                         </a>
                         {% else %}
-                        <a href="{% url 'post_detail' post.slug %}">
+                        <a href="{% url 'post_detail' post.id %}">
                             <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
                         </a>
                         {% endif %}
