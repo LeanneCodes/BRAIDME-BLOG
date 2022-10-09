@@ -1,0 +1,53 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<style>
+  .auth-bm {
+      position: relative;
+      height: 100vh;
+      background: black;
+      color: white;
+      background-position: center;
+      background-size: cover;
+  }
+
+  .text-height-bm {
+    position: absolute;
+    bottom: 0;
+    left: 7rem;
+    right: 0;
+    padding-bottom: 180px;
+  }
+</style>
+
+<div class="container-fluid auth-bm" style="background-image: url(https://res.cloudinary.com/darxyuwht/image/upload/v1665327932/cgho7yhqpagwhpseupcb.jpg);">
+  <div class="row" style="margin-top: -125px;"></div>
+  <div class="row text-height-bm">
+    <div class="col auth-text-color">
+      <h3>{% trans "Sign Up" %}</h3>
+      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="link-yellow">sign in</a>.{% endblocktrans %}</p>
+      <form class="signup" style="width: 20%;" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit" class="shop-now-button btn btn-md text-uppercase py-3">{% trans "Sign Up" %} &raquo;</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

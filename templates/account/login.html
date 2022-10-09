@@ -1,0 +1,50 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<style>
+  .auth-bm {
+      position: relative;
+      height: 100vh;
+      background: black;
+      color: white;
+      background-position: center;
+      background-size: cover;
+  }
+</style>
+
+<div class="container-fluid auth-bm" style="background-image: url(https://res.cloudinary.com/darxyuwht/image/upload/v1665327932/cgho7yhqpagwhpseupcb.jpg);">
+  <div class="row" style="margin-top: -125px;"></div>
+  <div class="row max-height-bm">
+    <div class="col auth-text-color">
+      <h3>{% trans "Sign In" %}</h3>
+      <p>{% blocktrans %}Welcome back to the &nbsp;<span class="logo-font">BRAIDME</span> blog. To leave a<br>comment or like a post, please log in. If you
+        have not<br>created an account yet, then <a class="link-yellow" href="{{ signup_url }}">sign up</a>
+        first.{% endblocktrans %}</p>
+      <div class="col">
+        <form class="login" style="width: 20%;" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="shop-now-button btn btn-md text-uppercase py-3" type="submit">{% trans "Sign In" %}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

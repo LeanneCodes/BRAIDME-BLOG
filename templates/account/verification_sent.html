@@ -1,0 +1,49 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<style>
+    .auth-bm {
+        position: relative;
+        height: 100vh;
+        background: black;
+        color: white;
+        background-position: center;
+        background-size: cover;
+    }
+  
+    .text-height-bm {
+      position: absolute;
+      bottom: 0;
+      left: 7rem;
+      right: 0;
+      padding-bottom: 350px;
+    }
+
+    .container {
+        overflow-x: hidden !important;
+    }
+  </style>
+  
+  <div class="container-fluid auth-bm" style="background-image: url(https://res.cloudinary.com/darxyuwht/image/upload/v1665327932/cgho7yhqpagwhpseupcb.jpg);">
+    <div class="row" style="margin-top: -168px;"></div>
+    <div class="row text-height-bm">
+      <div class="col auth-text-color">
+        <h1>{% trans "Verify Your E-mail Address" %}</h1>
+        <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided<br>to finalize the signup process. Please contact us if you do not receive<br>it within a few minutes.{% endblocktrans %}</p>
+        <p>Back to <a href="{% url 'account_login' %}" class="link-yellow">sign in</a>.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

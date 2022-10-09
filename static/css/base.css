@@ -196,6 +196,36 @@ body {
     color: #343a40;
 }
 
+/* auth */
+
+.max-height-bm {
+    position: absolute;
+    bottom: 0;
+    left: 7rem;
+    right: 0;
+    padding-bottom: 310px;
+}
+
+.link-yellow {
+    color: #DEB063;
+}
+
+.link-yellow:hover {
+    color: #F9FAFC;
+}
+
+.shop-now-button {
+    min-width: 100px !important;
+    background-color: white !important;
+    color: #000 !important;
+}
+
+.shop-now-button:hover {
+    min-width: 100px !important;
+    background-color: black !important;
+    color: white !important;
+}
+
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
     width: 0; 
