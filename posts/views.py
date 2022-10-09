@@ -13,13 +13,13 @@ from .forms import CommentForm, PostForm
 class PostList(generic.ListView):
 
     def get(self, request, *args, **kwargs):
+        p = Paginator(Post.objects.all(), 8)
+        page = request.GET.get('page')
+        total_posts = p.get_page(page)
         posts = Post.objects.all()
         query = None
         sort = None
         direction = None
-        p = Paginator(Post.objects.all(), 8)
-        page = request.GET.get('page')
-        total_posts = p.get_page(page)
 
         if request.GET:
             if 'sort' in request.GET:
