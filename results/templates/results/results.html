@@ -38,8 +38,8 @@
                     <div class="product-container col-10 offset-1 bg-white">
                         <div class="row mt-4 mb-2"></div>
                         <div class="row">
-                            {% for post in posts %}
-                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
+                            {% for post in total_posts %}
+                                <div class="col-md-3 mb-1 mt-1">
                                     <div class="card border border-gray h-100">
                                         {% if post.featured_image %}
                                         <a href="{% url 'post_detail' post.id %}">
@@ -74,30 +74,38 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% if forloop.counter|divisibleby:1 %}
-                                    <div class="col-12 d-sm-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}                        
-                                {% if forloop.counter|divisibleby:2 %}
-                                    <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
-                                {% if forloop.counter|divisibleby:3 %}
-                                    <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}
                                 {% if forloop.counter|divisibleby:4 %}
-                                    <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                                        <hr>
-                                    </div>
-                                {% endif %}  
-                            {% endfor %}
+                                <div class="col-12 d-none d-xl-block mt-1 mb-1">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <nav aria-label="Page navigation example text-center" style="margin: auto;">
+                    <ul class="pagination justify-content-center">
+                    {% if total_posts.has_previous %}
+                        <li class="page-item"><a class="page-link btn-black" href="?page=1">&laquo First</a></li>
+                        <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                  
+                    <li class="page-item disabled"><a href="#" class="page-link">Page {{ total_posts.number }} of {{ total_posts.paginator.num_pages }}</a></li>
+                    
+                    {% for i in nums %}
+                    <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                    {% endfor %}
+                    
+        
+                    {% if total_posts.has_next %}
+                        <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.paginator.num_pages }}">Last &raquo</a></li>
+                    {% endif %}
+                   </ul>
+                </nav>
             </div> 
         </div>
     </div>

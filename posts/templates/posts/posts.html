@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="row">
-                {% for post in posts %}
+                {% for post in total_posts %}
                 <div class="col-md-3 mb-1 mt-1">
                     <div class="card border-gray h-100">
                         {% if post.featured_image %}
@@ -64,16 +64,18 @@
                             <div class="row">
                                 <div class="col">
                                     {% if post.created != post.updated %}
-                                    <p class="mb-0 text-center font-weight-bold">Updated on: {{ post.updated }}</p>
+                                    <p class="mb-0 text-center font-weight-bold small">Updated on: {{ post.updated }}</p>
                                     {% else %}
-                                    <p class="mb-0 text-center font-weight-bold">Posted on: {{ post.created }}</p>
+                                    <p class="mb-0 text-center font-weight-bold small">Posted on: {{ post.created }}</p>
                                     {% endif %}
                                     <br>
-                                    {% if post.likes.count != 0 %}
-                                    <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-solid fa-heart"></i></p>
-                                    {% else %}
-                                    <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-regular fa-heart"></i></p>
-                                    {% endif %}
+                                    <span>
+                                        {% if post.likes.count != 0 %}
+                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-solid fa-heart"></i></p>
+                                        {% else %}
+                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-regular fa-heart"></i></p>
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +97,27 @@
                 {% endfor %}
             </div>
         </div>
-    </div>  
+        <nav aria-label="Page navigation example text-center" style="margin: auto;">
+            <ul class="pagination justify-content-center">
+            {% if total_posts.has_previous %}
+                <li class="page-item"><a class="page-link btn-black" href="?page=1">&laquo First</a></li>
+                <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.previous_page_number }}">Previous</a></li>
+            {% endif %}
+          
+            <li class="page-item disabled"><a href="#" class="page-link">Page {{ total_posts.number }} of {{ total_posts.paginator.num_pages }}</a></li>
+            
+            {% for i in nums %}
+            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endfor %}
+            
+
+            {% if total_posts.has_next %}
+                <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link btn-black" href="?page={{ total_posts.paginator.num_pages }}">Last &raquo</a></li>
+            {% endif %}
+           </ul>
+        </nav>  
+    </div>
 </div>
 <div class="btt-button shadow-sm border border-circle">
     <a class="btt-link d-flex h-100">

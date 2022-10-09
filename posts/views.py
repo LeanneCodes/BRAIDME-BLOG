@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import generic, View
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.db.models.functions import Lower
@@ -16,6 +17,9 @@ class PostList(generic.ListView):
         query = None
         sort = None
         direction = None
+        p = Paginator(Post.objects.all(), 8)
+        page = request.GET.get('page')
+        total_posts = p.get_page(page)
 
         if request.GET:
             if 'sort' in request.GET:
@@ -44,6 +48,7 @@ class PostList(generic.ListView):
             'posts': posts,
             'search_term': query,
             'current_sorting': current_sorting,
+            'total_posts': total_posts,
         }
 
         return render(request, 'posts/posts.html', context)
@@ -54,6 +59,8 @@ class PostDetail(View):
     def get(self, request, post_id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(Post, pk=post_id)
+        nextpost = Post.objects.filter(id__gt=post.id).order_by('id').first()
+        prevpost = Post.objects.filter(id__lt=post.id).order_by('id').last()
         comments = post.comments.filter(approved=True).order_by("-created")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -67,7 +74,9 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                'prevpost': prevpost,
+                'nextpost': nextpost,
             },
         )
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.views import View
+from django.core.paginator import Paginator
 from django.db.models import Q
 from posts.models import Post
 
@@ -12,6 +13,9 @@ def all_results(request):
 
     posts = Post.objects.all()
     query = None
+    p = Paginator(Post.objects.all(), 8)
+    page = request.GET.get('page')
+    total_posts = p.get_page(page)
 
     if request.GET:
         if 'q' in request.GET:
@@ -26,6 +30,7 @@ def all_results(request):
     context = {
         'posts': posts,
         'search_term': query,
+        'total_posts': total_posts,
     }
 
     return render(request, 'results/results.html', context)
