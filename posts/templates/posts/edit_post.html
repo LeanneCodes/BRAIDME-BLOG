@@ -13,18 +13,16 @@
 {% block content %}
     <div class="overlay"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <hr>
-                <h2 class="logo-font mb-4">Blog Post Management</h2>
-                <h5 class="text-muted">Edit a Post</h5>
-                <hr>
+        <div class="row" style="margin-top: -35px;">
+            <div class="col text-center mt-3">
+                <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog Post Management</h2>
+                <h4 class="text-white">Edit a Post</h4>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <form method="POST" action="{% url 'edit_post' post.id %}" class="form mb-2" enctype="multipart/form-data">
+        <div class="row bg-white mt-3 pt-4 pb-4" style="min-height: 100vh; color: gray !important;">
+            <div class="col-11" style="margin: auto;">
+                <form method="POST" action="{% url 'edit_post' post.id %}" class="form mt-4 mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
                         {% if field.name != 'image' %}
@@ -41,6 +39,16 @@
             </div>            
         </div>
     </div>
+    <div class="btt-button shadow-sm border border-circle">
+        <a class="btt-link d-flex h-100">
+            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+        </a>	
+    </div>
+    <footer id="sticky-footer" class="py-4 bg-light">
+        <div class="text-center">
+        <small class="text-black">Copyright &copy; <script>document.write(new Date().getFullYear())</script>&nbsp; &nbsp;<span class="logo-font text-black">BRAIDME</span></small>
+        </div>
+    </footer>
 {% endblock %}
 
 {% block postloadjs %}
