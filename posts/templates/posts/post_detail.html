@@ -143,14 +143,14 @@
                 {% if prevpost %}
                 <a href="{% url 'posts' %}/{{ prevpost.id }}">&laquo Previous Post: {{ prevpost }}</a>
                 {% else %}
-                <a href="{% url 'home' %}">Homepage</a>
+                <a href="{% url 'posts' %}">All Posts</a>
                 {% endif %}
             </div>
             <div class="col-3 p-3 btn blog-post-btn">
                 {% if nextpost %}
                 <a href="{% url 'posts' %}/{{ nextpost.id }}">Next Post: {{ nextpost }} &raquo</a>
                 {% else %}
-                <a href="{% url 'home' %}">Homepage</a>
+                <a href="{% url 'posts' %}">All Posts</a>
                 {% endif %}
             </div>
         </div>
