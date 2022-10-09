@@ -8,7 +8,7 @@ from posts.models import Post
 
 
 def all_results(request):
-    """ A view to show all products, posts and stylists, including sorting and search queries """
+    """ A view to show all posts, including sorting and search queries """
 
     posts = Post.objects.all()
     query = None

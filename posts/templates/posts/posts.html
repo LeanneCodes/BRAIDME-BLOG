@@ -15,7 +15,6 @@
     <div class="row" style="margin-top: -35px;">
         <div class="col text-center mt-3">
             <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog</h2>
-            <hr class="w-50 mb-1">
         </div>
     </div>
     <div class="row bg-white mt-3" style="min-height: 100vh;">
@@ -49,7 +48,7 @@
                         <div class="card border-gray h-100">
                             {% if post.featured_image %}
                             <a href="{% url 'post_detail' post.slug %}">
-                                <img class="card-img-top img-fluid" src="{{ post.featured_image_url }}" alt="{{ post.title }}">
+                                <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
                             </a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}">

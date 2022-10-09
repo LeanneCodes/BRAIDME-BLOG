@@ -9,7 +9,6 @@ from .forms import CommentForm
 
 
 class PostList(generic.ListView):
-    paginate_by = 8
 
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
