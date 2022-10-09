@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
@@ -114,3 +114,14 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+def add_post(request):
+    """ Add a post to the store """
+    form = PostForm()
+    template = 'posts/add_post.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
