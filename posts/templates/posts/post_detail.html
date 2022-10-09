@@ -19,7 +19,7 @@
 <div class="bg-white vh-100 pb-5" style="color: black; overflow-x: hidden;">
     <div class="container message-view">
         <div class="row">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-8 offset-md-2 pt-4">
                 {% for message in messages %}
                 <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
                     {{ message | safe }}
@@ -60,9 +60,9 @@
                                 <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                     {% csrf_token %}
                                     {% if liked %}
-                                    <a type="submit" name="blogpost_id" value="{{post.slug}}"><i class="fa-solid fa-heart"></i></a>
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like-bm"><i class="fas fa-heart"></i></button>
                                     {% else %}
-                                    <a type="submit" name="blogpost_id" value="{{post.slug}}"><i class="fa-regular fa-heart"></i></a>
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like-bm"><i class="far fa-heart"></i></button>
                                     {% endif %}
                                 </form>
                                 {% else %}
@@ -139,6 +139,11 @@
         </a>	
     </div>
 </div>
+<footer id="sticky-footer" class="py-4 bg-light">
+    <div class="text-center">
+    <small class="text-black">Copyright &copy; <script>document.write(new Date().getFullYear())</script>&nbsp; &nbsp;<span class="logo-font text-black">BRAIDME</span></small>
+    </div>
+</footer>
 {% endblock %}
 
 {% block postloadjs %}

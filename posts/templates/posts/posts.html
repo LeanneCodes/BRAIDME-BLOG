@@ -17,7 +17,7 @@
             <h2 class="text-white"><span class="logo-font">BRAIDME</span> Blog</h2>
         </div>
     </div>
-    <div class="row bg-white mt-3" style="min-height: 100vh;">
+    <div class="row bg-white mt-3 pb-4" style="min-height: 100vh;">
         <div class="product-container col-10 offset-1 pr-3 pl-3">
             <div class="row mt-1 mb-2">
                 <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
@@ -44,133 +44,63 @@
             </div>
             <div class="row">
                 {% for post in posts %}
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-                        <div class="card border-gray h-100">
-                            {% if post.featured_image %}
-                            <a href="{% url 'post_detail' post.slug %}">
-                                <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-                            </a>
-                            {% else %}
-                            <a href="{% url 'post_detail' post.slug %}">
-                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
-                            </a>
-                            {% endif %}
-                            <div class="card-body pb-0 text-center">
-                                <p class="lead mb-0">{{ post.title }}</p>
-                                <h6 class="mb-0">By {{ post.author }}</h6>
-                            </div>
-                            <br>
-                            <div class="card-footer bg-white pt-0 border-0 text-center">
-                                <div class="row">
-                                    <div class="col">
-                                        {% if post.created != post.updated %}
-                                        <p class="mb-0 text-center font-weight-bold">Updated on: {{ post.updated }}</p>
-                                        {% else %}
-                                        <p class="mb-0 text-center font-weight-bold">Posted on: {{ post.created }}</p>
-                                        {% endif %}
-                                        <br>
-                                        {% if post.likes.count != 0 %}
-                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-solid fa-heart"></i></p>
-                                        {% else %}
-                                        <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-regular fa-heart"></i></p>
-                                        {% endif %}
-                                    </div>
+                <div class="col-md-3 mb-1 mt-1">
+                    <div class="card border-gray h-100">
+                        {% if post.featured_image %}
+                        <a href="{% url 'post_detail' post.slug %}">
+                            <img class="card-img-top img-fluid" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'post_detail' post.slug %}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
+                        </a>
+                        {% endif %}
+                        <div class="card-body pb-0 text-center">
+                            <p class="lead mb-0">{{ post.title }}</p>
+                            <h6 class="mb-0">By {{ post.author }}</h6>
+                        </div>
+                        <br>
+                        <div class="card-footer bg-white pt-0 border-0 text-center">
+                            <div class="row">
+                                <div class="col">
+                                    {% if post.created != post.updated %}
+                                    <p class="mb-0 text-center font-weight-bold">Updated on: {{ post.updated }}</p>
+                                    {% else %}
+                                    <p class="mb-0 text-center font-weight-bold">Posted on: {{ post.created }}</p>
+                                    {% endif %}
+                                    <br>
+                                    {% if post.likes.count != 0 %}
+                                    <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-solid fa-heart"></i></p>
+                                    {% else %}
+                                    <p class="mb-0 text-center font-weight-bold">{{ post.number_of_likes }} <i class="fa-regular fa-heart"></i></p>
+                                    {% endif %}
                                 </div>
-                            </div>
-                        </div>
-                    </div>  
-                    {% if forloop.counter|divisibleby:1 %}
-                        <div class="col-12 d-sm-none mt-3 mb-3">
-                            <hr>
-                        </div>
-                    {% endif %}                        
-                    {% if forloop.counter|divisibleby:2 %}
-                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mt-3 mb-3">
-                            <hr>
-                        </div>
-                    {% endif %}
-                    {% if forloop.counter|divisibleby:3 %}
-                        <div class="col-12 d-none d-lg-block d-xl-none mt-3 mb-3">
-                            <hr>
-                        </div>
-                    {% endif %}
-                    {% if forloop.counter|divisibleby:4 %}
-                        <div class="col-12 d-none d-xl-block mt-3 mb-3">
-                            <hr>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Prev </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
-
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}    
-</div>
-        
-<!-- Blog Entries Column -->
-        <!-- <div class="col-12 left blog-margin">
-            <div class="row">
-                {% for post in post_list %}
-                <div class="col-md-3">
-                    <div class="card mb-4">
-                        <div class="card-body ">
-                            <div class="image-container">
-                                {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top"
-                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
-                                {% else %}
-                                <img class="card-img-top rounded-6" src=" {{ post.featured_image.url }}">
-                                {% endif %}
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ post.author }}</p>
-                                </div>
-                            </div>
-                            <div class="title-container">
-                                <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                    <h2 class="card-title">{{ post.title }}</h2>
-                                    <p class="card-text">{{ post.excerpt }}</p>
-                                </a>
-                                <hr />
-                                <p class="card-text text-muted h6">{{ post.created}} <i class="far fa-heart"></i>
-                                    {{ post.number_of_likes }}</p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
                 {% if forloop.counter|divisibleby:4 %}
+                <div class="col-12 d-none d-xl-block mt-1 mb-1">
+                    <hr>
+                </div>
             </div>
             <div class="row">
                 {% endif %}
                 {% endfor %}
-
             </div>
         </div>
+    </div>  
+</div>
+<div class="btt-button shadow-sm border border-circle">
+    <a class="btt-link d-flex h-100">
+        <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+    </a>	
+</div>
+<footer id="sticky-footer" class="py-4 bg-light">
+    <div class="text-center">
+    <small class="text-black">Copyright &copy; <script>document.write(new Date().getFullYear())</script>&nbsp; &nbsp;<span class="logo-font text-black">BRAIDME</span></small>
     </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Prev </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
-
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
-</div> -->
+</footer>
 {% endblock %}
 
 {% block postloadjs %}

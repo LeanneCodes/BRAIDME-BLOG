@@ -47,6 +47,16 @@ body {
     border: 1px solid white;
 }
 
+.btn-like-bm {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.btn-like-bm:active {
+    background-color: transparent !important;
+    border: none !important;
+}
+
 .icon {
     align-items: center;
     display: inline-flex;
