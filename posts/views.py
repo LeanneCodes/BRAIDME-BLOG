@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.db.models import Q
@@ -116,8 +117,13 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[post.id]))
 
 
+@login_required
 def add_post(request):
     """ Add a post """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only admin users can do that.')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -137,8 +143,13 @@ def add_post(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_post(request, post_id):
     """ Edit a post """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only admin users can do that.')
+        return redirect(reverse('home'))
+
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -161,8 +172,13 @@ def edit_post(request, post_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_post(request, post_id):
     """ Delete a post """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only admin users can do that.')
+        return redirect(reverse('home'))
+
     post = get_object_or_404(Post, pk=post_id)
     post.delete()
     messages.success(request, 'Post deleted!')

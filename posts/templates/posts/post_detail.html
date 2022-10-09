@@ -41,6 +41,12 @@
                     <p>By {{ post.author }}, posted on {{ post.updated }}</p>
                 </div>
             </div>
+            {% if request.user.is_superuser %}
+                <small class="ml-3 mb-2 text-center">
+                    <a href="{% url 'edit_post' post.id %}">Edit</a> | 
+                    <a class="text-danger" href="{% url 'delete_post' post.id %}">Delete</a>
+                </small>
+            {% endif %}
         </div>
     </div>
     <hr class="w-50 mb-1">

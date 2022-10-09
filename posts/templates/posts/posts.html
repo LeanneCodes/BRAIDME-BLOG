@@ -77,6 +77,12 @@
                                 </div>
                             </div>
                         </div>
+                        {% if request.user.is_superuser %}
+                            <small class="ml-3 mb-2">
+                                <a href="{% url 'edit_post' post.id %}">Edit</a> | 
+                                <a class="text-danger" href="{% url 'delete_post' post.id %}">Delete</a>
+                            </small>
+                        {% endif %}
                     </div>
                 </div>  
                 {% if forloop.counter|divisibleby:4 %}
