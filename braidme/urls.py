@@ -21,6 +21,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls'), name="home-urls"),
     path('summernote/', include('django_summernote.urls')),
-    path('posts/', include('posts.urls'), name="post-urls"),
-    path('results/', include('results.urls'), name="results-urls"),
+    path('posts/', include('posts.urls')),
+    path('results/', include('results.urls')),
 ]
