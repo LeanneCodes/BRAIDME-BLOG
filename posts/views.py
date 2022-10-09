@@ -9,9 +9,6 @@ from .forms import CommentForm
 
 
 class PostList(generic.ListView):
-    # model = Post
-    # queryset = Post.objects.filter(status=1).order_by("-created")
-    # template_name = "posts/posts.html"
     paginate_by = 8
 
     def get(self, request, *args, **kwargs):
